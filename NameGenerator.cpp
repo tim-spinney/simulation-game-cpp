@@ -309,8 +309,9 @@ const std::string lastNames[numLastNames] = {
 };
 
 FullName generateName(std::random_device &rng) {
-    return {
+    FullName name = {
             firstNames[rng() % numFirstNames],
             lastNames[rng() % numLastNames]
     };
+    return name;
 }

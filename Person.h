@@ -2,6 +2,7 @@
 
 #include <string>
 #include <random>
+#include <iostream>
 #include "FullName.h"
 
 enum Activity {

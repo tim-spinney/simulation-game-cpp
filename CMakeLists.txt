@@ -3,6 +3,9 @@ project(simulation_game_cpp)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(simulation_game_cpp main.cpp
+add_executable(simulation_game_cpp
+        main.cpp
         Person.cpp
-        NameGenerator.cpp)
+        NameGenerator.cpp
+        Simulation.cpp
+)

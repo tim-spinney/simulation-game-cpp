@@ -7,7 +7,7 @@ Person::Person(std::random_device &rng) : Person(generateName(rng), rng) {
 }
 
 Person::Person(FullName name, std::random_device &rng)
-: name(std::move(name)) {
+: name(name) {
     std::uniform_int_distribution<Stat> statGenerator(0, MAX_STAT_VALUE);
     hunger = statGenerator(rng);
     energy = statGenerator(rng);
