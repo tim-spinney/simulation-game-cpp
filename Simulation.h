@@ -11,4 +11,5 @@ private:
     unsigned int currentTime = 0;
     size_t population;
     Person *persons;
+    std::allocator<Person> allocator;
 };
