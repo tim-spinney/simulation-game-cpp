@@ -17,7 +17,7 @@ void Person::advanceTime() {
     /* TODO: make thresholds and increases into constants or generalize stat updates
        into some mapping of stat to update behavior
     */
-    if (activity == Activity::Eating)
+    if (activity == Activity::Eating && residence && residence->tryTransferInventory(ItemType::Food, 1))
     {
         hunger -= 5;
     }
@@ -35,7 +35,7 @@ void Person::advanceTime() {
         energy--;
     }
 
-    if (hunger > 40)
+    if (hunger > 200)
     {
         activity = Activity::Eating;
     }
@@ -45,3 +45,12 @@ void Person::advanceTime() {
         activity = Activity::Sleeping;
     }
 }
+
+void Person::moveIn(Residence &newHome) {
+    residence = &newHome;
+}
+
+void Person::moveOutOfResidence() {
+    residence = nullptr;
+}
+

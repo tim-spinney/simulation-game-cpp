@@ -4,6 +4,7 @@
 #include <random>
 #include <iostream>
 #include "FullName.h"
+#include "Residence.h"
 
 enum Activity {
     Idle,
@@ -16,6 +17,9 @@ public:
     Person(FullName name, std::random_device &rng);
     explicit Person(std::random_device &rng);
     void advanceTime();
+    void moveIn(Residence &residence);
+    void moveOutOfResidence();
+
 private:
     typedef unsigned char Stat;
     static constexpr Stat MAX_STAT_VALUE = std::numeric_limits<Person::Stat>::max();
@@ -24,4 +28,5 @@ private:
     Stat hunger;
     Stat energy;
     Activity activity = Activity::Idle;
+    Residence *residence;
 };

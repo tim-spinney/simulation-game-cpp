@@ -8,4 +8,8 @@ add_executable(simulation_game_cpp
         Person.cpp
         NameGenerator.cpp
         Simulation.cpp
+        Inventory.cpp
+        Inventory.h
+        Residence.cpp
+        Residence.h
 )
