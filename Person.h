@@ -19,7 +19,7 @@ public:
     void advanceTime();
     void moveIn(Residence &residence);
     void moveOutOfResidence();
-
+    [[nodiscard]] bool hasResidence() const { return residence != nullptr; }
 private:
     typedef unsigned char Stat;
     static constexpr Stat MAX_STAT_VALUE = std::numeric_limits<Person::Stat>::max();

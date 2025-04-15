@@ -2,6 +2,8 @@
 
 #include "Simulation.h"
 
+static const unsigned int MAX_STARTING_FOOD = 100;
+
 Simulation::Simulation(size_t population, size_t numHomes, std::random_device &rng)
 : rng(rng)
 , population(population)
@@ -34,7 +36,7 @@ Simulation::Simulation(size_t population, size_t numHomes, std::random_device &r
         }
     }
     for(size_t homeIndex = 0; homeIndex < numHomes; homeIndex++) {
-        homes[homeIndex].tryTransferInventory(ItemType::Food, rng() % 100);
+        homes[homeIndex].tryTransferInventory(ItemType::Food, rng() % MAX_STARTING_FOOD);
     }
 }
 
@@ -56,5 +58,29 @@ void Simulation::advanceTime() {
     /* TODO: have a random chance to have a person leave our simulation and be replaced by a new person who moves
      * into a random home
      */
+}
+
+void Simulation::addResidence(unsigned int numResidents) {
+    Residence residence;
+    size_t nextUnhousedPersonIndex = 0;
+    for(unsigned int i = 0; i < numResidents; i++) {
+        while(nextUnhousedPersonIndex < population && persons[nextUnhousedPersonIndex].hasResidence()) {
+            nextUnhousedPersonIndex++;
+        }
+        if(nextUnhousedPersonIndex < population) {
+            residence.movePersonIn(persons[nextUnhousedPersonIndex]);
+            persons[nextUnhousedPersonIndex].moveIn(residence);
+        }
+    }
+    residence.tryTransferInventory(ItemType::Food, rng() % MAX_STARTING_FOOD);
+
+    Residence *newHomes = new Residence[numHomes+1];
+    for(size_t i = 0; i < numHomes; i++) {
+        newHomes[i] = homes[i];
+    }
+    newHomes[numHomes] = std::move(residence);
+    numHomes++;
+    delete []homes;
+    homes = newHomes;
 }
 

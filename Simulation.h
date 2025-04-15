@@ -8,6 +8,7 @@ public:
     ~Simulation();
     // TODO: copy operations
     void advanceTime();
+    void addResidence(unsigned int numResidents);
 private:
     std::random_device &rng;
     unsigned int currentTime = 0;
