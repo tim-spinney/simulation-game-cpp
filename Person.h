@@ -28,5 +28,5 @@ private:
     Stat hunger;
     Stat energy;
     Activity activity = Activity::Idle;
-    Residence *residence;
+    Residence *residence = nullptr;
 };
